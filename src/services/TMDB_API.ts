@@ -2,6 +2,7 @@ import axios from "axios";
 import type { Movie, MovieResponse } from "../types/Movie.types";
 import type { GenreResponse } from "../types/Genre.types";
 import type { PersonResponse } from "../types/Person.types";
+import type { TrailerResponse } from "../types/Trailer.types";
 
 interface PageResult {
   results: Movie[];
@@ -79,4 +80,12 @@ export const getByGenre = async (movieId: number, pageNumber: number) => {
     }
   });
   return res.data;
+}
+
+export const getInTheatres = async (limit = 12) => {
+  const res = await instance.get<PageResult>(`/movie/now_playing`);
+  return { 
+    ...res.data, 
+    results: res.data.results.slice(0, limit) 
+  };
 }
