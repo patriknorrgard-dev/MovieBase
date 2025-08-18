@@ -82,6 +82,11 @@ export const getByGenre = async (movieId: number, pageNumber: number) => {
   return res.data;
 }
 
+export const getTrailers = async (movieId: number) => {
+  const res = await instance.get<TrailerResponse>(`/movie/${movieId}/videos`);
+  return res.data;
+}
+
 export const getInTheatres = async (limit = 12) => {
   const res = await instance.get<PageResult>(`/movie/now_playing`);
   return { 
