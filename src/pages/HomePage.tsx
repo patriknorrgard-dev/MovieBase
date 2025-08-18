@@ -1,40 +1,69 @@
-import { useQuery } from "@tanstack/react-query";
-import { getTopRated, getPopular } from "../services/TMDB_API";
+import { useQueries, useSuspenseQueries } from "@tanstack/react-query";
+import { getTrailers } from "../services/TMDB_API";
 import Carousel from "../components/Carousel/Carousel";
 import MovieCard from "../components/Carousel/Cards/MovieCard";
+import TrailerCard from "../components/Carousel/Cards/TrailerCard";
+import { Suspense } from "react";
+import Spinner from "../components/Spinner";
+import { popularMoviesOptions, ratedMoviesOptions, theatreMoviesOptions } from "../hooks/useMovies";
 
 const HomePage = () => {
 
-  const { data: popularmovies } = useQuery({
-    queryKey: (["popular", 1]),
-    queryFn: () => getPopular(1),
-  })
+  const [popular, rated, theatre] = useQueries({ 
+    queries: [
+      popularMoviesOptions(), 
+      ratedMoviesOptions(),
+      theatreMoviesOptions(),
+    ], 
+  });
 
-  const { data: ratedmovies } = useQuery({
-    queryKey: (["rated", 1]),
-    queryFn: () => getTopRated(1),
+  const combinedQueries = useSuspenseQueries({
+    queries: theatre.data?.results.map((movie) => ({
+      queryKey: ["trailer", movie.id],  
+      queryFn: () => getTrailers(movie.id),
+    })) ?? [],
+    combine: (results) => {
+      return {
+        data: results.map(result => result.data.results[0]),
+      }
+    },
   })
 
   return (
     <div className="flex flex-col gap-10">
-      {popularmovies && (
+
+      {combinedQueries && (
+        <>
+          <h2 className="text-gray-300 text-4xl px-2">Now in theatre</h2>
+          <div className="h-[320px]">
+            <Suspense fallback={<Spinner />}>
+              <Carousel 
+                data={combinedQueries.data}
+                Card={TrailerCard}
+              />
+            </Suspense>
+          </div>
+        </>
+      )}
+
+      {popular.data && (
         <>
           <h2 className="text-gray-300 text-4xl px-2">Popular Movies</h2>
           <div className="h-[320px]">
             <Carousel 
-              data={popularmovies.results}
+              data={popular.data.results}
               Card={MovieCard}
             />
           </div>
         </>
       )}
       
-      {ratedmovies && (
+      {rated.data && (
         <>
           <h2 className="text-gray-300 text-4xl px-2">Highest Rated Movies</h2>
           <div className="h-[320px]">
             <Carousel 
-              data={ratedmovies.results}
+              data={rated.data.results}
               Card={MovieCard}
             />
           </div>
