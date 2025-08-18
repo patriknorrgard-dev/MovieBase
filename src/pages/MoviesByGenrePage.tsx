@@ -7,15 +7,13 @@ import MovieListCard from "../components/Movie/MovieListCard";
 import Pagination from "../components/Pagination";
 
 const MoviesByGenrePage = () => {
-
   const [searchParams, setSearchParams] = useSearchParams();
+  const currentPage = Number(searchParams.get("page")) || 1;
   const { id } = useParams();
-
-  const page = Number(searchParams.get("page")) || 1;
-
+  
   const { data: movies, error, isError, isLoading } = useQuery({
-    queryKey: (["MoviesByGenre", id, page]),
-    queryFn: () => getByGenre(Number(id), page),
+    queryKey: (["MoviesByGenre", id, currentPage]),
+    queryFn: () => getByGenre(Number(id), currentPage),
   })
 
   return (
@@ -30,18 +28,12 @@ const MoviesByGenrePage = () => {
           <MovieListCard movies={movies.results} />
 
           <Pagination 
-            firstPage={page === 1}
-            lastPage={page === movies.total_pages}
+            firstPage={currentPage === 1}
+            lastPage={currentPage === movies.total_pages}
             currentPage={movies.page}
             totalPages={movies.total_pages}
-            onPrevPage={() => {
-              const previousPage = page - 1;
-              setSearchParams({ page: String(previousPage) });
-            }}
-            onNextPage={() => {
-              const nextPage = page + 1;
-              setSearchParams({ page: String(nextPage) });
-            }}
+            onPrevPage={() => setSearchParams({ page: (currentPage - 1).toString() }) }
+            onNextPage={() => setSearchParams({ page: (currentPage + 1).toString() }) }
           />
         </div>
       )}

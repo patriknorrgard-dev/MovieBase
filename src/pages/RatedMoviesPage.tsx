@@ -8,12 +8,11 @@ import MovieListCard from "../components/Movie/MovieListCard";
 
 const RatedMoviesPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-
-  const page = Number(searchParams.get("page")) || 1;
+  const currentPage = Number(searchParams.get("page")) || 1;
 
   const { data: movies, error, isError, isLoading } = useQuery({
-    queryKey: (["ratedMovies", page]),
-    queryFn: () => getTopRated(page),
+    queryKey: (["ratedMovies", currentPage]),
+    queryFn: () => getTopRated(currentPage),
   })
 
   return (
@@ -29,18 +28,12 @@ const RatedMoviesPage = () => {
           <MovieListCard movies={movies.results} />
 
           <Pagination 
-            firstPage={page === 1}
-            lastPage={page === movies.total_pages}
+            firstPage={currentPage === 1}
+            lastPage={currentPage === movies.total_pages}
             currentPage={movies.page}
             totalPages={movies.total_pages}
-            onPrevPage={() => {
-              const previousPage = page - 1;
-              setSearchParams({ page: String(previousPage) });
-            }}
-            onNextPage={() => {
-              const nextPage = page + 1;
-              setSearchParams({ page: String(nextPage) });
-            }}
+            onPrevPage={() => setSearchParams({ page: (currentPage - 1).toString() }) }
+            onNextPage={() => setSearchParams({ page: (currentPage + 1).toString() }) }
           />
         </div>
       )}

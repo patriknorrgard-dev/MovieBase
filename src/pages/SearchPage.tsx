@@ -6,13 +6,13 @@ import SearchResult from "../components/Search/SearchResult";
 
 const SearchPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-
-  const query = searchParams.get("query") ?? "";
-  const page = Number(searchParams.get("page")) || 1;
+  const currentPage = Number(searchParams.get("page")) || 1;
+  const query = searchParams.get("query") || "";
+  
 
   const { data: search } = useQuery({
-    queryKey: ["query", query, page],
-    queryFn: () => searchMovie(query, page),
+    queryKey: ["query", query, currentPage],
+    queryFn: () => searchMovie(query, currentPage),
   })
   
   return (
@@ -26,18 +26,12 @@ const SearchPage = () => {
           <SearchResult movies={search.results} />
 
           <Pagination 
-            firstPage={page === 1} 
-            lastPage={page === search.total_pages} 
+            firstPage={currentPage === 1} 
+            lastPage={currentPage === search.total_pages} 
             currentPage={search.page}
             totalPages={search.total_pages}
-            onPrevPage={() => {
-              const previousPage = page - 1;
-              setSearchParams({ query, page: String(previousPage) });
-            }}
-            onNextPage={() => {
-              const nextPage = page + 1;
-              setSearchParams({ query, page: String(nextPage) });
-            }}
+            onPrevPage={() => setSearchParams({ page: (currentPage - 1).toString() }) }
+            onNextPage={() => setSearchParams({ page: (currentPage + 1).toString() }) }
           />
         </div>
       )}
