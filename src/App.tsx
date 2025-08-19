@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router";
-import Navigation from "./components/Navigation/Navigation";
+import Navigation from "./components/navigation/Navigation";
 import RatedMoviesPage from "./pages/RatedMoviesPage";
 import SearchPage from "./pages/SearchPage";
 import HomePage from "./pages/HomePage";

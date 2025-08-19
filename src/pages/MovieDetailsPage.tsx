@@ -3,7 +3,7 @@ import { useParams } from "react-router";
 import { getMovieDetails } from "../services/TMDB_API";
 import ErrorAlert from "../components/ErrorAlert";
 import Spinner from "../components/Spinner";
-import MovieDetails from "../components/Movie/MovieDetails";
+import MovieDetails from "../components/movie/MovieDetails";
 
 const MovieDetailsPage = () => {
   const { id } = useParams();

@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { getPersonDetails } from "../services/TMDB_API";
 import { useParams } from "react-router";
-import Carousel from "../components/Carousel/Carousel";
-import PersonCard from "../components/Carousel/Cards/PersonCard";
-import MovieCard from "../components/Carousel/Cards/MovieCard";
+import Carousel from "../components/carousel/Carousel";
+import PersonCard from "../components/carousel/cards/PersonCard";
+import MovieCard from "../components/carousel/cards/MovieCard";
 
 const PersonPage = () => {
   const { id } = useParams();

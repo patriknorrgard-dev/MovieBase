@@ -4,7 +4,7 @@ import burger from "../../assets/icons/menu-burger.svg";
 import arrowDown from "../../assets/icons/down-arrow.svg";
 import arrowUp from "../../assets/icons/top-arrow.svg";
 import GenreList from "./GenreList";
-import Search from "../Search/Search";
+import Search from "../search/Search";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

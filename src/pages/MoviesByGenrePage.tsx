@@ -3,7 +3,7 @@ import { getByGenre } from "../services/TMDB_API";
 import { useParams, useSearchParams } from "react-router";
 import ErrorAlert from "../components/ErrorAlert";
 import Spinner from "../components/Spinner";
-import MovieListCard from "../components/Movie/MovieListCard";
+import MovieListCard from "../components/movie/MovieListCard";
 import Pagination from "../components/Pagination";
 
 const MoviesByGenrePage = () => {

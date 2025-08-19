@@ -1,8 +1,8 @@
 import { useQueries, useSuspenseQueries } from "@tanstack/react-query";
 import { getTrailers } from "../services/TMDB_API";
-import Carousel from "../components/Carousel/Carousel";
-import MovieCard from "../components/Carousel/Cards/MovieCard";
-import TrailerCard from "../components/Carousel/Cards/TrailerCard";
+import Carousel from "../components/carousel/Carousel";
+import MovieCard from "../components/carousel/cards/MovieCard";
+import TrailerCard from "../components/carousel/cards/TrailerCard";
 import { Suspense } from "react";
 import Spinner from "../components/Spinner";
 import { popularMoviesOptions, ratedMoviesOptions, theatreMoviesOptions } from "../hooks/useMovies";

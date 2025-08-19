@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { searchMovie } from "../services/TMDB_API";
 import { useSearchParams } from "react-router";
 import Pagination from "../components/Pagination";
-import SearchResult from "../components/Search/SearchResult";
+import SearchResult from "../components/search/SearchResult";
 
 const SearchPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
