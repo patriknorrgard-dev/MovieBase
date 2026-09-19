@@ -24,6 +24,10 @@ const Carousel = <T,>(props: CarouselProps<T>) => {
     }
   }, [activeIndex]);
 
+  if (!props.data) {
+    return null;
+  }
+
   return (
     <div className="carousel-wrapper">
       <CarouselControls 

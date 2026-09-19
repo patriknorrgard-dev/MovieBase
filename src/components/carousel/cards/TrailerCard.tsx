@@ -5,6 +5,10 @@ interface TrailerCardProps {
 }
 
 const TrailerCard: React.FC<TrailerCardProps> = ({ item }) => {
+  if (!item) {
+    return null;
+  }
+  
   return (
     <iframe
       src={`https://www.youtube.com/embed/${item.key}`}
