@@ -10,7 +10,7 @@ import MoviesByGenrePage from "./pages/MoviesByGenrePage";
 
 function App() {
   return (
-    <div className="bg-dark-gradient min-h-screen">
+    <div className="min-h-screen">
       <Navigation />
       
       <div className="@container max-w-screen-xl mx-auto">
