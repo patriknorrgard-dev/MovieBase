@@ -11,7 +11,7 @@ const TrailerCard: React.FC<TrailerCardProps> = ({ item }) => {
   
   return (
     <iframe
-      src={`https://www.youtube.com/embed/${item.key}`}
+      src={`https://www.youtube-nocookie.com/embed/${item.key}`}
       title={item.name}
       allowFullScreen
       className="w-[240px] h-[270px]"
