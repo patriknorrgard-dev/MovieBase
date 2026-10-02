@@ -24,7 +24,9 @@ const HomePage = () => {
     })) ?? [],
     combine: (results) => {
       return {
-        data: results.map(result => result.data.results[0]),
+        data: results
+        .map(result => result.data.results[0])
+        .filter(Boolean),
       }
     },
   })
