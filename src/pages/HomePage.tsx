@@ -32,44 +32,38 @@ const HomePage = () => {
   })
 
   return (
-    <div className="flex flex-col gap-10">
+    <div className="flex flex-col gap-40 pt-15">
 
       {combinedQueries && (
-        <>
-          <h2 className="text-gray-300 text-4xl px-2">Now in theatre</h2>
-          <div className="h-[320px]">
+        <section className="h-[400px]">
+          <h2 className="text-gray-300 text-4xl px-2 pb-5">Now in theatre</h2>
             <Suspense fallback={<Spinner />}>
               <Carousel 
                 data={combinedQueries.data}
                 Card={TrailerCard}
               />
             </Suspense>
-          </div>
-        </>
+        </section>
       )}
 
       {popular.data && (
-        <>
-          <h2 className="text-gray-300 text-4xl px-2">Popular Movies</h2>
-          <div className="h-[320px]">
+        <section className="h-[300px]">
+          <h2 className="text-gray-300 text-4xl px-2 pb-5">Popular Movies</h2>
             <Carousel 
               data={popular.data.results}
               Card={MovieCard}
             />
-          </div>
-        </>
+        </section>
       )}
       
       {rated.data && (
-        <>
-          <h2 className="text-gray-300 text-4xl px-2">Highest Rated Movies</h2>
-          <div className="h-[320px]">
+        <section className="h-[300px]">
+          <h2 className="text-gray-300 text-4xl px-2 pb-5">Highest Rated Movies</h2>
             <Carousel 
               data={rated.data.results}
               Card={MovieCard}
             />
-          </div>
-        </>
+        </section>
       )}
     </div>
   )
