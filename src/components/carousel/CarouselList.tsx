@@ -18,7 +18,7 @@ const handleImageSize = (index: number) => {
 };
 
   return (
-    <div className="carousel-list flex space-x-4 overflow-x-auto">
+    <div className="carousel-list flex space-x-4 touch-pan-x overflow-x-auto">
       {data.map((image, index) => (
         <div key={index} ref={setRef(index)}>
           <Card
