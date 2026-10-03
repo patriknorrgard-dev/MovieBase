@@ -17,7 +17,7 @@ const HomePage = () => {
     ], 
   });
 
-  const combinedQueries = useSuspenseQueries({
+  const trailers = useSuspenseQueries({
     queries: theatre.data?.results.map((movie) => ({
       queryKey: ["trailer", movie.id],  
       queryFn: () => getTrailers(movie.id),
@@ -34,12 +34,12 @@ const HomePage = () => {
   return (
     <div className="flex flex-col gap-40 pt-15">
 
-      {combinedQueries && (
+      {trailers && (
         <section className="h-[400px]">
           <h2 className="text-gray-300 text-4xl px-2 pb-5">Now in theatre</h2>
             <Suspense fallback={<Spinner />}>
               <Carousel 
-                data={combinedQueries.data}
+                data={trailers.data}
                 Card={TrailerCard}
               />
             </Suspense>
