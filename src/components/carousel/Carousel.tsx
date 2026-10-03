@@ -1,11 +1,16 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, type ComponentType } from "react";
 import CarouselControls from "./CarouselControls";
 import CarouselList from "./CarouselList";
 
+interface CardProps<T> {
+  item: T;
+  size: string
+}
+
 export interface CarouselProps<T> {
   data: T[];
-  Card: React.ComponentType<{ item: T; size: string }>;
-  initialBig?: boolean;
+  Card: ComponentType<CardProps<T>>;
+  defaultBig?: boolean;
 }
 
 const Carousel = <T,>(props: CarouselProps<T>) => {
